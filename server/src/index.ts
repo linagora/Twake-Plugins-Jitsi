@@ -10,10 +10,7 @@ app.use(express.json());
 app.post(config.get("server.prefix") + "/hook", async (req, res) => {
   const event = req.body as HookEvent;
 
-  if (
-    event.type === "action" &&
-    (event.name === "open" || event.name === "command")
-  ) {
+  if (event.type === "action" && event.name === "open") {
     //Open confirmation message
     return res.send(await askConfirm(event));
   } else if (
@@ -23,8 +20,8 @@ app.post(config.get("server.prefix") + "/hook", async (req, res) => {
     //Close the confirmation message
     return res.send(await cancel(event));
   } else if (
-    event.type === "interactive_message_action" &&
-    event.name === "confirm"
+    (event.type === "interactive_message_action" && event.name === "confirm") ||
+    (event.type === "action" && event.name === "command")
   ) {
     //Send the jitsi link in the chat for real
     return res.send(await confirm(event));

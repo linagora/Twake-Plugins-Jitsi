@@ -18,7 +18,8 @@ export const cancel = async (event: HookEvent) => {
 };
 
 export const confirm = async (event: HookEvent) => {
-  const room = event.content.message.context.room || "";
+  const room =
+    event.content.command || event.content.message.context.room || "";
 
   const msg = {
     subtype: "application",
@@ -27,13 +28,21 @@ export const confirm = async (event: HookEvent) => {
     context: { allow_delete: "everyone" },
   };
 
-  cancel(event);
+  if (event.content.message) cancel(event);
 
   await sendMessage(msg, {
-    company_id: event.content.message.context.company_id,
-    workspace_id: event.content.message.context.workspace_id,
-    channel_id: event.content.message.context.channel_id,
-    thread_id: event.content.message.context.thread_id,
+    company_id: event.content.message
+      ? event.content.message.context.company_id
+      : event.content.channel.company_id,
+    workspace_id: event.content.message
+      ? event.content.message.context.workspace_id
+      : event.content.channel.workspace_id,
+    channel_id: event.content.message
+      ? event.content.message.context.channel_id
+      : event.content.channel.id,
+    thread_id: event.content.message
+      ? event.content.message.context.thread_id
+      : event.content.thread?.id,
   });
 };
 
