@@ -1,5 +1,8 @@
 import { HookEvent } from "./types";
 import { t } from "./i18n";
+import config from "config";
+
+const server = (config.get("jitsi.server") || "").replace(/\/$/, "");
 
 //Jitsi button to send in a message
 export const generateCallMsg = (
@@ -24,14 +27,14 @@ export const generateCallMsg = (
             inline: "true",
             style: "primary",
             action_id: "show_link",
-            content: `https://jitsi.linagora.com/${room}`,
+            content: `${server}/${room}`,
           },
         },
         { type: "br" },
         {
           type: "url",
           user_identifier: true,
-          url: `https://jitsi.linagora.com/${room}`,
+          url: `${server}/${room}`,
           content: {
             type: "button",
             content: t(lang, "join_call"),
