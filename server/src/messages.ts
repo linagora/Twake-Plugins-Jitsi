@@ -2,7 +2,10 @@ import { HookEvent } from "./types";
 import { t } from "./i18n";
 import config from "config";
 
-const server = (config.get("jitsi.server") || "").replace(/\/$/, "");
+const server = ((config.get("jitsi.server") || "") as string).replace(
+  /\/$/,
+  ""
+);
 
 //Jitsi button to send in a message
 export const generateCallMsg = (
