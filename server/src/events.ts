@@ -63,7 +63,7 @@ export const askConfirm = async (event: HookEvent) => {
       company_id: event.content.channel.company_id,
       workspace_id: event.content.channel.workspace_id,
       channel_id: event.content.channel.id,
-      thread_id: event.content.thread?.id,
+      thread_id: event.content.parent_message?.id || null,
     },
   };
 

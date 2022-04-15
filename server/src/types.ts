@@ -4,6 +4,7 @@ export type HookEvent = {
   connection_id?: string;
   user_id?: string;
   content: {
+    parent_message?: any;
     command?: string;
     channel?: any;
     thread?: any;
