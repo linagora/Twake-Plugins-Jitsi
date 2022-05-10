@@ -24,14 +24,8 @@ export const generateCallMsg = (
           ]),
         },
         {
-          type: "system",
-          content: {
-            type: "button",
-            inline: "true",
-            style: "primary",
-            action_id: "show_link",
-            content: `${server}/${room}`,
-          },
+          type: "compile",
+          content: ` ${server}/${room}`,
         },
         { type: "br" },
         {
