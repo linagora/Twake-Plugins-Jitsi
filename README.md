@@ -15,5 +15,6 @@ sudo docker run \
   -e CREDENTIALS_ENDPOINT='https://canary.twake.app' \
   -e CREDENTIALS_ID='abcdef' \
   -e CREDENTIALS_SECRET='some-twake-application-secret' \
+  -e JITSI_SERVER='https://meet.jit.si/' \
   jitsi
 ```
